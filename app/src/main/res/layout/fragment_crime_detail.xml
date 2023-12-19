@@ -3,43 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="16dp">
-
+    android:layout_margin="16dp"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/crime_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadline5"
         android:text="@string/crime_title_label" />
 
     <EditText
-        android:id="@+id/crime_title_txt"
+        android:id="@+id/crime_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:minHeight="48dp"
+        android:importantForAutofill="no"
         android:hint="@string/crime_title_hint"
-        tools:ignore="Autofill" />
+        android:inputType="text" />
 
     <TextView
-        android:id="@+id/details_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadline5"
         android:text="@string/crime_details_label" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/crime_date"
-        tools:text="Wed May 11 11:56 EST 2022"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Wed May 11 11:56 EST 2022" />
 
     <CheckBox
-        android:id="@+id/is_solved"
+        android:id="@+id/crime_solved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label" />
-
 </LinearLayout>

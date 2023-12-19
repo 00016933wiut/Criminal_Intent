@@ -2,32 +2,23 @@ package com.example.criminalintent
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import java.util.UUID
 import androidx.lifecycle.ViewModel
-
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class CrimeListViewModel : ViewModel() {
-    private val crimes = mutableListOf<Crime>()
-    private val currentTimeMillis = System.currentTimeMillis()
-    private val currentDate = java.util.Date(currentTimeMillis)
+    private val crimeRepository = CrimeRepository.get()
+
+    private val _crimes: MutableStateFlow<List<Crime>> = MutableStateFlow(emptyList())
+    val crimes: StateFlow<List<Crime>>
+        get() = _crimes.asStateFlow()
+
     init {
         viewModelScope.launch {
-            crimes+=loadCrime()
+            crimeRepository.getCrimes().collect {
+                _crimes.value = it
+            }
         }
-    }
-
-    fun loadCrime():List<Crime>{
-        val result = mutableListOf<Crime>()
-        for (i in 0 until 100) {
-            val crime = Crime(
-                id = UUID.randomUUID(),
-                title = "Crime #$i",
-                date = currentDate,
-                isSolved = i % 2 == 0,
-                requiresPolice = i % 11 == 0
-            )
-            result += crime
-        }
-        return result
     }
 }
